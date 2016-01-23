@@ -9,6 +9,7 @@ public class GameThread extends Thread
 		this.canvas = canvas;
 	}
 	
+	@Override
 	public void run()
 	{
 		while(true)
@@ -16,6 +17,7 @@ public class GameThread extends Thread
 			try
 			{
 				Thread.sleep(16);
+				Main.player.launchLaser();
 				canvas.repaint();
 			}
 			catch(Exception e)

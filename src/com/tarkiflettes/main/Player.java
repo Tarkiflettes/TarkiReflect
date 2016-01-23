@@ -8,11 +8,18 @@ public class Player
 	private int angle;
 	
 	private final MoveCapacity moveCapacity;
+	private Laser playerLaser;
 	
 	public Player(Point2D coords, MoveCapacity moveCapacity)
 	{
 		this.coords = coords;
 		this.moveCapacity = moveCapacity;
+	}
+	
+	public void launchLaser()
+	{
+		angle++;
+		playerLaser = new Laser(LaserColor.GREEN, new Point2D.Double(coords.getX() + 16, coords.getY() + 16), angle);
 	}
 	
 	public Point2D getCoords()
@@ -38,5 +45,10 @@ public class Player
 	public MoveCapacity getMoveCapacity()
 	{
 		return moveCapacity;
+	}
+	
+	public Laser getPlayerLaser()
+	{
+		return playerLaser;
 	}
 }

@@ -3,26 +3,23 @@ package com.tarkiflettes.main;
 import java.awt.geom.Point2D;
 
 public class Laser
-{
+{	
 	private Point2D startCoords;
-	private Point2D endCoords;
 	private double angle;
+	private Laser nextLaser;
+	private LaserColor laserColor;
+	private double coefX;
+	private double coefY;
 	
-	public Laser(Point2D startsCoords, double angle)
+	public Laser(LaserColor color, Point2D startsCoords, double angle)
 	{
+		this.laserColor = color;
 		this.startCoords = startsCoords;
-		this.endCoords = startsCoords;
 		this.angle = angle;
-	}
-	
-	public Point2D getStartsCoords()
-	{
-		return startCoords;
-	}
-	
-	public Point2D getEndCoords()
-	{
-		return endCoords;
+		
+		double radiangle = Math.toRadians(getAngle());
+		this.coefX = Math.sin(radiangle);
+		this.coefY = Math.cos(radiangle);
 	}
 	
 	public double getAngle()
@@ -30,8 +27,33 @@ public class Laser
 		return angle;
 	}
 	
-	public void setEndCoords(Point2D coords)
+	public void setNextLaser(Laser laser)
 	{
-		endCoords = coords;
+		nextLaser = laser;
+	}
+	
+	public Laser getNextLaser()
+	{
+		return nextLaser;
+	}
+
+	public Point2D getStartCoords()
+	{
+		return startCoords;
+	}
+
+	public LaserColor getLaserColor()
+	{
+		return laserColor;
+	}
+
+	public double getCoefX()
+	{
+		return coefX;
+	}
+
+	public double getCoefY()
+	{
+		return coefY;
 	}
 }

@@ -5,10 +5,13 @@ import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
 import com.tarkiflettes.menu.Menu;
+import com.tarkiflettes.menu.Utils;
 
 public class Main
 {
@@ -33,9 +36,59 @@ public class Main
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		Canvas canvas = new Canvas();
+		final Canvas canvas = new Canvas();
 		frame.setContentPane(canvas);
 		frame.setVisible(true);
+		
+		frame.addMouseListener(new MouseListener() {
+			
+			public void mouseReleased(MouseEvent e) {
+				int x = e.getX();
+				int y = e.getY();
+				
+				for (int a=0;a<Utils.getElemCount();a++)
+						Utils.setButtonColor(Utils.getColorButton(), a);
+				canvas.repaint();
+			}
+			
+			public void mousePressed(MouseEvent e) {
+				int x = e.getX();
+				int y = e.getY();
+				int index = Utils.whichButton(x, y);
+				
+				if (index!=-1) {
+					switch (index) {
+					case 0:
+						System.out.println("koukou");
+						break;
+					case 1:
+						System.out.println("koukou");
+						break;
+					case 2:
+						System.out.println("koukou");
+						break;
+					case 3:
+						System.exit(0);
+						break;
+					}
+					Utils.setButtonColor(Utils.getColorButtonMouseOver(), index);
+				}
+				canvas.repaint();
+				
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				
+			}
+			
+			public void mouseEntered(MouseEvent e) {
+				
+			}
+			
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		
 	}
 
