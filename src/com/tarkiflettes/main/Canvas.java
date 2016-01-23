@@ -23,8 +23,13 @@ public class Canvas extends JPanel
 		this.g = g;
 		g.setColor(new Color(44, 62, 80));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		
-		new Menu(g, this.getWidth(), this.getHeight());
+		switch (Utils.getWindows()) {
+		case 0:
+			new Menu(g, this.getWidth(), this.getHeight());
+			break;
+		case 1:
+			break;
+		}
 		
 	}
 	

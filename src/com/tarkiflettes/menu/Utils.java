@@ -4,20 +4,20 @@ import java.awt.Color;
 
 public class Utils {
 	
-	private int window = 0;
+	private static int window = 0;
 
 	private static Color colorButton = new Color(41, 128, 185);
 	private static Color colorButtonText = new Color(240, 240, 240);
 	private static Color colorButtonMouseOver = new Color(52, 152, 219);
 	
 	//private static String[] buttonsNames = {"Jouir", "Multicouilles", "Opcons", "Quitteub"};
-	private static String[] buttonsNames = {"Jouer", "Multijoueur", "Options", "Quitter"};
-	private static Color[] buttonsColors = {colorButton, colorButton, colorButton,  colorButton};
-	private static Color[] buttonsColorsText = {colorButtonText, colorButtonText, colorButtonText,  colorButtonText};
-	public static int[] buttonsX = {-1, -1, -1, -1};
-	private static int[] buttonsY = {150, 350, 550, 750};
-	private static int[] buttonsWidth = {500, 500, 500, 500};
-	private static int[] buttonsHeight = {150, 150, 150, 150};
+	private static String[] buttonsNames = {"Jouer", "Multijoueur", "Editeur de niveau", "Options", "Quitter"};
+	private static Color[] buttonsColors = {colorButton, colorButton, colorButton, colorButton, colorButton};
+	private static Color[] buttonsColorsText = {colorButtonText, colorButtonText, colorButtonText, colorButtonText, colorButtonText};
+	public static int[] buttonsX = {-1, -1, -1, -1, -1};
+	private static int[] buttonsY = {100, 225, 350, 475, 600};
+	private static int[] buttonsWidth = {500, 500, 500, 500, 500};
+	private static int[] buttonsHeight = {100, 100, 100, 100, 100};
 	
 	public static int whichButton(int x, int y) {
 		for(int a = 0;a<buttonsNames.length;a++) {
@@ -27,7 +27,6 @@ public class Utils {
 		}
 		return -1;
 	}
-	
 	
 	public static Color getColorButton() {
 		return colorButton;
@@ -171,6 +170,13 @@ public class Utils {
 	
 	public static int getElemCount() {
 		return buttonsNames.length;
+	}
+	
+	public static void setWindows(int window) {
+		Utils.window = window;
+	}
+	public static int getWindows() {
+		return window;
 	}
 	
 }

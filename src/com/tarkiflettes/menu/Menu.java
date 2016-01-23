@@ -46,6 +46,37 @@ public class Menu {
 		g.setFont(font);
 		g.drawString(name, x+width/2-metrics.stringWidth(name)/2, y+height/2+30/2);
 	}
+	
+	public static void mousePressed(int x, int y) {
 
+		int index = Utils.whichButton(x, y);
+		
+		if (index!=-1) {
+			switch (index) {
+			case 0:
+				Utils.setWindows(index);
+				break;
+			case 1:
+				Utils.setWindows(index);
+				break;
+			case 2:
+				Utils.setWindows(index);
+				break;
+			case 3:
+				Utils.setWindows(index);
+				break;
+			case 4:
+				System.exit(0);
+				break;
+			}
+			Utils.setButtonColor(Utils.getColorButtonMouseOver(), index);
+		}
+		
+	}
+
+	public static void mouseReleased(int x, int y) {
+		for (int a=0;a<Utils.getElemCount();a++)
+				Utils.setButtonColor(Utils.getColorButton(), a);
+	}
 	
 }
