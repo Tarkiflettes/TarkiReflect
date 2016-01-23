@@ -8,13 +8,19 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import com.tarkiflettes.menu.Menu;
+
 public class Main
 {
+	
+	private static JFrame frame;
+	private static Menu menu;
+	
 	public static void main(String[] args)
 	{
 		System.out.println("Starting laser game...");
 
-		JFrame frame = new JFrame("Laser Game");
+		frame = new JFrame("Laser Game");
 		frame.setSize(1000, 800);
 
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -29,8 +35,8 @@ public class Main
 
 		Canvas canvas = new Canvas();
 		frame.setContentPane(canvas);
-
 		frame.setVisible(true);
+		
 	}
 
 	public static DisplayMode getResolutionForSize(int width, int height)
@@ -46,4 +52,5 @@ public class Main
 		}
 		return dev.getDisplayMode();
 	}
+
 }

@@ -1,39 +1,33 @@
-package com.tarkiflettes.main;
+package com.tarkiflettes.menu;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JPanel;
+import javax.swing.JFrame;
 
-import com.tarkiflettes.menu.Menu;
+public class Menu {
 
-public class Canvas extends JPanel
-{
-	private static final long serialVersionUID = 1L;
 	private Graphics g;
-	private static Color colorButton = new Color(41, 128, 185);
-	private static Color colorButtonMouseOver = new Color(46, 204, 113);
+	private Color colorButton = new Color(41, 128, 185);
+	private Color colorButtonMouseOver = new Color(52, 152, 219);
 	
 	private int width;
 	private int height;
 	
-	private static String[] buttonsNames = {"Jouer", "Multijoueur", "Options", "Quitter"};
-	private static Color[] buttonsColors = {colorButton, colorButton, colorButton,  colorButton};
-	private static int[] buttonsX = {-1, -1, -1, -1};
-	private static int[] buttonsY = {150, 350, 550, 750};
-	private static int[] buttonsWidth = {500, 500, 500, 500};
-	private static int[] buttonsHeight = {150, 150, 150, 150};
+	private String[] buttonsNames = {"Jouer", "Multijoueur", "Options", "Quitter"};
+	private Color[] buttonsColors = {colorButton, colorButton, colorButton,  colorButton};
+	private int[] buttonsX = {-1, -1, -1, -1};
+	private int[] buttonsY = {150, 350, 550, 750};
+	private int[] buttonsWidth = {500, 500, 500, 500};
+	private int[] buttonsHeight = {150, 150, 150, 150};
 	
-	public void paintComponent(Graphics g)
-	{
-		//new Menu(g, getWidth(), getHeight());
-
+	public Menu(Graphics g, int width, int height) {
 		this.g = g;
 		
-		this.height = getHeight();
-		this.width = getWidth();
+		this.height = height;
+		this.width = width;
 		
 		// background
 		g.setColor(new Color(44, 62, 80));
@@ -52,6 +46,8 @@ public class Canvas extends JPanel
 					buttonsHeight[a],
 					buttonsColors[a]);
 		}
+		
+		
 	}
 	
 	public void createButton(int x, int y, int width, int height, Color color) {
@@ -70,12 +66,11 @@ public class Canvas extends JPanel
 	
 	class CustomMouseListener implements MouseListener {
 		public void mouseClicked(MouseEvent e) {
-			buttonsColors[1] = colorButtonMouseOver;
-			System.out.println("Mouse Clicked: (" + e.getX() + ", " + e.getY() + ")");
+			buttonsColors[whichButton(e.getX(), e.getY())] = colorButtonMouseOver;
+			//System.out.println("Mouse Clicked: (" + e.getX() + ", " + e.getY() + ")");
 		}
 
 		public void mousePressed(MouseEvent e) {
-			System.out.println("Mouse Clicked: (" + e.getX() + ", " + e.getY() + ")");
 		}
 
 		public void mouseReleased(MouseEvent e) {
