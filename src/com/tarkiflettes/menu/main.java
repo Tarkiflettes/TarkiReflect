@@ -1,5 +1,5 @@
 package com.tarkiflettes.menu;
 
-public class main {
+public class Main {
 
 }
