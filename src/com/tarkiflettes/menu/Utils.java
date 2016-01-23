@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class Utils {
 	
-	
+	private int window = 0;
 
 	private static Color colorButton = new Color(41, 128, 185);
 	private static Color colorButtonText = new Color(240, 240, 240);
