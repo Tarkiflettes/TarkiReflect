@@ -1,60 +1,66 @@
 package com.tarkiflettes.main;
 
-import java.awt.Rectangle;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
 public class Player
 {
 	private Point2D coords;
 	private double angle;
-	
+
 	private final MoveCapacity moveCapacity;
 	private Laser playerLaser;
-	
+
+	double j = 0;
+
 	public Player(Point2D coords, MoveCapacity moveCapacity)
 	{
 		this.coords = coords;
 		this.moveCapacity = moveCapacity;
 	}
-	
+
 	public void launchLaser()
 	{
-		angle++;
-		playerLaser = new Laser(LaserColor.GREEN, new Point2D.Double(coords.getX() + 16, coords.getY() + 16), angle);
-		
+		double radAngle = Math.toRadians(angle);
+		playerLaser = new Laser(LaserColor.GREEN, new Point2D.Double(coords.getX() + 16 + Math.sin(radAngle) * 18, coords.getY() + 16 + Math.cos(radAngle) * 18), angle);
+
+		int i = 0;
 		Laser currentLaser = playerLaser;
-		while(currentLaser != null)
+
+		while (currentLaser != null && i < 20)
 		{
 			currentLaser.setLenght(calcLongLaser(currentLaser));
-			
+
 			currentLaser = currentLaser.getNextLaser();
+			i++;
 		}
-		
+
 	}
 
 	public int calcLongLaser(Laser laser)
 	{
-		int x1 = 0;
-		int y1 = 0;
+		double x1 = laser.getStartCoords().getX();
+		double y1 = laser.getStartCoords().getY();
 		int res = 0;
-		double radiangle = Math.toRadians(laser.getAngle());
 		int len = -1;
 		int secu = 0;
-		while (len == -1 && secu <= 1200)
+		while (len == -1 && secu <= 2400)
 		{
 			for (Element el : Element.ELEMENT_LIST)
 			{
-				x1 = (int) (laser.getStartCoords().getX() + (Math.sin(radiangle) * secu));
-				y1 = (int) (laser.getStartCoords().getY() + (Math.cos(radiangle) * secu));
-				res = (int) Math.sqrt(Math.pow(laser.getStartCoords().getX() - x1, 2) + Math.pow(laser.getStartCoords().getY() - y1, 2));
+				x1 += (laser.getCoefX() * 0.5D);
+				y1 += (laser.getCoefY() * 0.5D);
+
 				if (el.getPolygon().contains(x1, y1))
 				{
-					for(Line2D l : el.getLineList())
+					res = (int) Math.sqrt(Math.pow(laser.getStartCoords().getX() - x1, 2) + Math.pow(laser.getStartCoords().getY() - y1, 2));
+					
+					for (Line l : el.getLineList())
 					{
-						if(l.intersects(new Rectangle(x1 - 1, y1 - 1, x1 + 1, y1 + 1)))
+						if (l.intersects(x1 - 2, y1 - 2, 2, 2))
 						{
-							el.handleLaser(l, new Point2D.Double((int) x1,  (int) y1));
+							Point2D.Double p = intersect(laser.getStartCoords().getX(), laser.getStartCoords().getY(), x1, y1, l.x1, l.y1, l.x2, l.y2);
+							el.handleLaser(laser, l, p);
+							res = (int) Math.sqrt(Math.pow(laser.getStartCoords().getX() - p.getX(), 2) + Math.pow(laser.getStartCoords().getY() - p.getY(), 2));
 							break;
 						}
 					}
@@ -67,34 +73,46 @@ public class Player
 
 		return 20000;
 	}
-	
+
 	public Point2D getCoords()
 	{
 		return coords;
 	}
-	
-	public void setCoords(Point2D newCoords)
+
+	public void setCoords(double d, double e)
 	{
-		coords = newCoords;
+		coords = new Point2D.Double(d, e);
 	}
 	
 	public int getAngle()
 	{
 		return (int) angle;
 	}
-	
+
 	public void setAngle(int newAngle)
 	{
 		angle = newAngle;
 	}
-	
+
 	public MoveCapacity getMoveCapacity()
 	{
 		return moveCapacity;
 	}
-	
+
 	public Laser getPlayerLaser()
 	{
 		return playerLaser;
+	}
+
+	public Point2D.Double intersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4)
+	{
+		double d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+		if (d == 0)
+			return null;
+
+		double xi = ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
+		double yi = ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
+
+		return new Point2D.Double(xi, yi);
 	}
 }

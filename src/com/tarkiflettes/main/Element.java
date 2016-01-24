@@ -1,40 +1,40 @@
 package com.tarkiflettes.main;
 
+import java.awt.Graphics;
 import java.awt.Polygon;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
-import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.sound.sampled.Line;
-
-public abstract class Element implements Serializable
+public abstract class Element
 {
 	public static final ArrayList<Element> ELEMENT_LIST = new ArrayList<Element>();
 
 	private final ArrayList<Laser> input = new ArrayList<Laser>();
 	private final ArrayList<Laser> output = new ArrayList<Laser>();
 
-	private final ArrayList<Line2D> lineList = new ArrayList<Line2D>();
+	private final ArrayList<Line> lineList = new ArrayList<Line>();
 	private Polygon polygon;
 	private Polygon defPolygon;
 
 	private int x;
 	private int y;
+	private int rotation;
 
-	public Element(int x, int y, Polygon polygon)
+	public Element(int x, int y, Polygon polygon, int rotation)
 	{
 		this.x = x;
 		this.y = y;
 		this.defPolygon = polygon;
 		this.polygon = polygon;
-		createLineList();
+		this.rotation = rotation;
+		rotate(rotation);
 		ELEMENT_LIST.add(this);
 	}
 
 	public void rotate(int angle)
 	{
 		angle = angle % 360;
+		rotation = angle;
 		Polygon nPolygon = new Polygon();
 		
 		float nAngle = (float) Math.toRadians(angle);
@@ -59,7 +59,7 @@ public abstract class Element implements Serializable
 		createLineList();
 	}
 
-	public abstract void handleLaser(Line2D line, Point2D.Double point);
+	public abstract void handleLaser(Laser laser, Line line, Point2D.Double point);
 
 	public ArrayList<Laser> getInput()
 	{
@@ -71,7 +71,7 @@ public abstract class Element implements Serializable
 		return output;
 	}
 
-	public ArrayList<Line2D> getLineList()
+	public ArrayList<Line> getLineList()
 	{
 		return lineList;
 	}
@@ -89,12 +89,33 @@ public abstract class Element implements Serializable
 		{
 			if (i == polygon.npoints - 1)
 			{
-				lineList.add(new Line2D.Float(polygon.xpoints[i], polygon.ypoints[i], polygon.xpoints[0], polygon.ypoints[0]));
+				Line line = new Line(polygon.xpoints[i], polygon.ypoints[i], polygon.xpoints[0], polygon.ypoints[0]);
+				line.calculateNormal(polygon);
+				lineList.add(line);
 			}
 			else
 			{
-				lineList.add(new Line2D.Float(polygon.xpoints[i], polygon.ypoints[i], polygon.xpoints[i + 1], polygon.ypoints[i + 1]));
+				Line line = new Line(polygon.xpoints[i], polygon.ypoints[i], polygon.xpoints[i + 1], polygon.ypoints[i + 1]);
+				line.calculateNormal(polygon);
+				lineList.add(line);
 			}
 		}
 	}
+
+	public int getRotation()
+	{
+		return rotation;
+	}
+	
+	public int getX()
+	{
+		return x;
+	}
+
+	public int getY()
+	{
+		return y;
+	}
+
+	public abstract void draw(Graphics g);
 }

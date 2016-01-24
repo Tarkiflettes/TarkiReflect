@@ -62,12 +62,13 @@ public class Main
 		//gameThread.start();
 		
 		Level koukou = new Level(1, 1);
-		koukou.addElement(new Mirror(10, 20, 90));
+		//koukou.addElement(new Mirror(10, 20, 90));
 		LevelStorage lapin = new LevelStorage();
 		lapin.addLevel(koukou);
 		
 		frame.addMouseListener(canvas);
 		frame.addMouseMotionListener(canvas);
+		frame.addKeyListener(canvas);
 		frame.addKeyListener(new KeyListener() {
 			
 			@Override
