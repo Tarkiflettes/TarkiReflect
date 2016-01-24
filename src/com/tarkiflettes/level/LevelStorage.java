@@ -14,7 +14,7 @@ public class LevelStorage {
 
 	private List<Level> levels = new ArrayList<>();
 	
-	private File file;
+	private File file = new File("pata.te");
 			
 	public LevelStorage() {
 		

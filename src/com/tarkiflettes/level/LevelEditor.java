@@ -14,6 +14,7 @@ import javax.swing.RepaintManager;
 import com.tarkiflettes.main.Element;
 import com.tarkiflettes.main.Main;
 import com.tarkiflettes.main.Mirror;
+import com.tarkiflettes.main.MirrorType;
 import com.tarkiflettes.main.MoveCapacity;
 import com.tarkiflettes.main.Player;
 import com.tarkiflettes.menu.Menu;
@@ -31,7 +32,7 @@ public class LevelEditor {
 	private int[] heightMenu = {15, 15, 15, 15, 15, 15};
 	private int marginTB = 30;
 	private int marginRL = 30;
-	private int selectElement = 0;
+	private static int selectElement = 0;
 	
 	
 	public LevelEditor() {
@@ -86,7 +87,6 @@ public class LevelEditor {
 				Utils.setWindows(-1);
 				break;
 			case 1:
-				System.out.println(nomsMenu[index]);
 				break;
 			case 2:
 				selectElement = 0;
@@ -101,8 +101,9 @@ public class LevelEditor {
 				selectElement = 3;
 				break;
 			default:
+				System.out.println(selectElement);
 				if (selectElement==0) {
-					CreateLevel.newLevel.addElement(new Mirror(x/32, y/32, 0));
+					CreateLevel.newLevel.addElement(new Mirror(x/32, y/32, 0, MirrorType.MIRROR));
 				} else if (selectElement==1) {
 					// CreateLevel.newLevel.addElement(new Mirror(x, y, 0));
 				} else if (selectElement==2) {
@@ -123,7 +124,7 @@ public class LevelEditor {
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		new Mirror(1, 1, 90);
+		//new Mirror(1, 1, 90);
 		new Player(new Point2D.Double(1, 1), MoveCapacity.Y);
 	}
 

@@ -56,7 +56,7 @@ public class Player
 					
 					for (Line l : el.getLineList())
 					{
-						if (l.intersects(x1 - 2, y1 - 2, 2, 2))
+						if (l.intersects(x1 - 3, y1 - 3, 3, 3))
 						{
 							Point2D.Double p = intersect(laser.getStartCoords().getX(), laser.getStartCoords().getY(), x1, y1, l.x1, l.y1, l.x2, l.y2);
 							el.handleLaser(laser, l, p);

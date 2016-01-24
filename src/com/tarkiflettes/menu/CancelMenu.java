@@ -41,7 +41,7 @@ public class CancelMenu {
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		new Mirror(1, 1, 90);
+		//new Mirror(1, 1, 90);
 		new Player(new Point2D.Double(1, 1), MoveCapacity.Y);
 	}
 

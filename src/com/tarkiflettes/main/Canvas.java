@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -29,6 +30,9 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 	private Multiplayer multiplayer = new Multiplayer();
 	private LevelEditor levelEditor = new LevelEditor();
 	private Option option = new Option();
+	public static Image rect;
+	public static Image rect2;
+	public static Image rect3;
 	
 	public void paintComponent(Graphics g)
 	{
@@ -298,7 +302,6 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 		case 4:
 			break;
 		}
-		System.out.println(e.getKeyCode());
 		Main.canvas.repaint();
 
 	}
