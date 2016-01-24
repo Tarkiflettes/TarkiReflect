@@ -2,6 +2,9 @@ package com.tarkiflettes.main;
 
 import java.awt.geom.Point2D;
 
+import com.tarkiflettes.game.Game;
+import com.tarkiflettes.menu.Utils;
+
 public class Player
 {
 	private Point2D coords;
@@ -20,6 +23,14 @@ public class Player
 
 	public void launchLaser()
 	{
+		for(Element e : Element.ELEMENT_LIST)
+		{
+			if(e instanceof Crystal)
+			{
+				((Crystal) e).setActive(false);
+			}
+		}
+		
 		double radAngle = Math.toRadians(angle);
 		playerLaser = new Laser(LaserColor.GREEN, new Point2D.Double(coords.getX() + 16 + Math.sin(radAngle) * 18, coords.getY() + 16 + Math.cos(radAngle) * 18), angle);
 
@@ -34,6 +45,22 @@ public class Player
 			i++;
 		}
 
+		boolean won = true;
+		for(Element e : Element.ELEMENT_LIST)
+		{
+			if(e instanceof Crystal && !((Crystal) e).isActive())
+			{
+				won = false;
+				break;
+			}
+		}
+		
+		if(won)
+		{
+			Element.ELEMENT_LIST.clear();
+			Main.player = null;
+			Utils.setWindows(-1);
+		}
 	}
 
 	public int calcLongLaser(Laser laser)
@@ -58,13 +85,17 @@ public class Player
 					{
 						if (l.intersects(x1 - 3, y1 - 3, 3, 3))
 						{
+							System.out.println("OK");
 							Point2D.Double p = intersect(laser.getStartCoords().getX(), laser.getStartCoords().getY(), x1, y1, l.x1, l.y1, l.x2, l.y2);
 							el.handleLaser(laser, l, p);
 							res = (int) Math.sqrt(Math.pow(laser.getStartCoords().getX() - p.getX(), 2) + Math.pow(laser.getStartCoords().getY() - p.getY(), 2));
 							break;
 						}
 					}
-					return res;
+					if(!(el instanceof Crystal))
+					{
+						return res;
+					}
 				}
 				secu++;
 

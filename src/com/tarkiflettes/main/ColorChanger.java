@@ -20,7 +20,7 @@ public class ColorChanger extends Element
 		double angle = (laser.getAngle() + 2 * (line.getNormal() - laser.getAngle())) % 360;
 		double radAngle = Math.toRadians(angle);
 				
-		laser.setNextLaser(new Laser(color, new Point2D.Double(point.getX() - Math.sin(radAngle) * 2, point.getY() - Math.cos(radAngle) * 2), 180 + angle));
+		laser.setNextLaser(new Laser(color, new Point2D.Double(point.getX() - Math.sin(radAngle) * 3, point.getY() - Math.cos(radAngle) * 3), 180 + angle));
 	}
 	
 	public LaserColor getColor()

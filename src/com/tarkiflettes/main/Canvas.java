@@ -26,7 +26,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 	
 	private Graphics g;
 	private Menu menu = new Menu();
-	private Game game = new Game();
+	private Game game = null;
 	private Multiplayer multiplayer = new Multiplayer();
 	private LevelEditor levelEditor = new LevelEditor();
 	private Option option = new Option();
@@ -195,7 +195,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 			menu.mouseMoved(e);
 			break;
 		case 0:
-			game.mouseMoved(e);
+			//game.mouseMoved(e);
 			break;
 		case 1:
 			multiplayer.mouseMoved(e);
@@ -218,7 +218,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 			menu.mouseDragged(e);
 			break;
 		case 0:
-			game.mouseDragged(e);
+			//game.mouseDragged(e);
 			break;
 		case 1:
 			multiplayer.mouseDragged(e);
@@ -264,7 +264,7 @@ public class Canvas extends JPanel implements MouseListener, MouseMotionListener
 			menu.mouseReleased(e);
 			break;
 		case 0:
-			game.mouseReleased(e);
+			//game.mouseReleased(e);
 			break;
 		case 1:
 			multiplayer.mouseReleased(e);

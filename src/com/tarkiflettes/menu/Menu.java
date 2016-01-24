@@ -4,20 +4,19 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 
+import com.tarkiflettes.game.Game;
 import com.tarkiflettes.main.Main;
+import com.tarkiflettes.main.MoveCapacity;
+import com.tarkiflettes.main.Player;
 
 public class Menu {
 
@@ -33,6 +32,7 @@ public class Menu {
 		this.g = g;
 		this.height = height;
 		this.width = width;
+		g.setColor(Color.WHITE);
 		
 		for(int a=0;a<Utils.getElemCount();a++) {
 			if (Utils.getButtonX(a)==-1)
@@ -47,6 +47,17 @@ public class Menu {
 					Utils.getButtonColorText(a),
 					Utils.getImgCurrent(a)
 					);
+		}
+
+        try {
+			final BufferedImage image = ImageIO.read(new File("src/com/tarkiflettes/menu/logo.png"));
+            g.drawImage(image, width/2-Utils.getButtonWidth(0)/2, 10, 200, 100, null);
+    		Font font = new Font("TimesRoman ",Font.BOLD,60);
+    		g.setFont(font);
+    		g.drawString("TarkiReflect", width/2-Utils.getButtonWidth(0)/2+200, 75);
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -71,7 +82,7 @@ public class Menu {
 	}
 	
 	
-	public static void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
 		int index = Utils.whichButton(x, y);
@@ -82,6 +93,7 @@ public class Menu {
 				break;
 			case 1:
 				Utils.setWindows(index);
+				new Game(g, width, height);
 				break;
 			case 2:
 				Utils.setWindows(index);

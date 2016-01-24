@@ -11,7 +11,7 @@ public class Utils {
 	private static Color colorButtonText = new Color(240, 240, 240);
 	private static Color colorButtonMouseOver = new Color(52, 152, 219);
 	
-	//private static String[] buttonsNames = {"Jouir", "Multicouilles", "Opcons", "Quitteub"};
+
 	private static String[] buttonsNames = {"Jouer", "Multijoueur", "Editeur de niveau", "Options", "Quitter"};
 	private static Color[] buttonsColors = {colorButton, colorButton, colorButton, colorButton, colorButton};
 	private static Color[] buttonsColorsText = {colorButtonText, colorButtonText, colorButtonText, colorButtonText, colorButtonText};

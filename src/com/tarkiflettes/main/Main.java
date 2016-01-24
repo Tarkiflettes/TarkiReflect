@@ -14,6 +14,7 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JFrame;
 
+import com.tarkiflettes.game.Game;
 import com.tarkiflettes.level.Level;
 import com.tarkiflettes.level.LevelEditor;
 import com.tarkiflettes.level.LevelStorage;
@@ -31,7 +32,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		System.out.println("Starting laser game...");
-
+		
 		frame = new JFrame("Laser Game");
 		frame.setSize(1000, 800);
 
@@ -50,45 +51,32 @@ public class Main
 		frame.setContentPane(canvas);
 		frame.setVisible(true);
 		
+		Game.init();
+		
 		canvas.repaint();
-		/*player = new Player(new Point2D.Double(50, 50), MoveCapacity.Y);
+		player = new Player(new Point2D.Double(50, 50), MoveCapacity.Y);
+
+		/*Element e = new Mirror(4, 4, 90, MirrorType.MIRROR);
+		new Mirror(8, 4, 90, MirrorType.MIRROR);
+		new Mirror(20, 4, 90, MirrorType.MIRROR);
+		new Mirror(4, 8, 90, MirrorType.MIRROR);
+		new Crystal(4, 4, 90, LaserColor.RED);*/
 		
-		Element e = new Mirror(4, 4, 90);
-		new Mirror(8, 4, 90);
-		new Mirror(20, 4, 90);
-		new Mirror(4, 8, 90);*/
+		GameThread gameThread = new GameThread(canvas);
+		gameThread.start();
 		
-		//GameThread gameThread = new GameThread(canvas);
-		//gameThread.start();
+		Game.construLevel1(5, 5);
 		
-		Level koukou = new Level(1, 1);
+		
+		/*Level koukou = new Level(1, 1);
 		//koukou.addElement(new Mirror(10, 20, 90));
 		LevelStorage lapin = new LevelStorage();
-		lapin.addLevel(koukou);
+		lapin.addLevel(koukou);*/
 		
 		frame.addMouseListener(canvas);
 		frame.addMouseMotionListener(canvas);
 		frame.addKeyListener(canvas);
-		frame.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				e.getKeyCode();
-			}
-		});
+
 		
 	}
 

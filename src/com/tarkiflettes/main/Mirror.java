@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
 
+import com.tarkiflettes.game.Game;
+
 public class Mirror extends Element
 {
 	private MirrorType type;
@@ -44,7 +46,8 @@ public class Mirror extends Element
 	{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.rotate(Math.toRadians(getRotation()), getX() * 32 + 16, getY() * 32 + 16);
-		g.drawImage(type == MirrorType.WALL ? Canvas.rect3 : type == MirrorType.FIX ? Canvas.rect2 : Canvas.rect, getX() * 32, getY() * 32, null);
+		//g.drawImage(type == MirrorType.WALL ? Game.rect3 : type == MirrorType.FIX ? Game.rect2 : Game.rect, getX() * 32, getY() * 32, null);
+		g.drawImage(type == MirrorType.WALL ? Game.rect3 : type == MirrorType.FIX ? Game.rect2 : Game.rect, getX() * 32, getY() * 32, null);
 		g2d.rotate(-Math.toRadians(getRotation()), getX() * 32 + 16, getY() * 32 + 16);
 	}
 	
