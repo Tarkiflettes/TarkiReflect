@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 public class Calculs
 {
 
-	public Point getIntersect(Laser l1, Line2D l2)
+	public static Point getIntersect(Laser l1, Line2D l2)
 	{
 		Line2D line1 = new Line2D.Double(l1.getStartCoords(), new Point2D.Double(l1.getStartCoords().getX() + l1.getCoefX() * 20000, l1.getStartCoords().getY() + l1.getCoefY() * 20000));
 		Line2D line2 = l2;

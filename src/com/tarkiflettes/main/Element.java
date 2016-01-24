@@ -3,11 +3,12 @@ package com.tarkiflettes.main;
 import java.awt.Polygon;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.sound.sampled.Line;
 
-public abstract class Element
+public abstract class Element implements Serializable
 {
 	public static final ArrayList<Element> ELEMENT_LIST = new ArrayList<Element>();
 
@@ -58,7 +59,7 @@ public abstract class Element
 		createLineList();
 	}
 
-	public abstract void handleLaser(Line line, Point2D point);
+	public abstract void handleLaser(Line2D line, Point2D.Double point);
 
 	public ArrayList<Laser> getInput()
 	{

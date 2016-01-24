@@ -1,22 +1,27 @@
 package com.tarkiflettes.level;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LevelStorage {
 
-	private List<Level> levels;
+	private List<Level> levels = new ArrayList<>();
 	
-	public LevelStorage() {
-	
-		try {
+	private File file;
 			
-			FileInputStream fis = new FileInputStream("pata.te");
+	public LevelStorage() {
+		
+		file = new File("pata.te");
+		try {
+
+			FileInputStream fis = new FileInputStream(file);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			levels = (List<Level>) ois.readObject();
 			ois.close();
@@ -67,7 +72,7 @@ public class LevelStorage {
 	private void savefile() {
 		try {
 			
-		    FileOutputStream fos = new FileOutputStream("pata.te");
+		    FileOutputStream fos = new FileOutputStream(file);
 		    ObjectOutputStream oos = new ObjectOutputStream(fos);   
 		    oos.writeObject(levels);
 		    oos.close(); 

@@ -5,12 +5,18 @@ import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.Point2D;
 
 import javax.swing.JFrame;
 
+import com.tarkiflettes.level.Level;
 import com.tarkiflettes.level.LevelEditor;
+import com.tarkiflettes.level.LevelStorage;
 import com.tarkiflettes.menu.Menu;
 import com.tarkiflettes.menu.Utils;
 
@@ -19,6 +25,8 @@ public class Main
 	
 	private static JFrame frame;
 	private static Menu menu;
+	public static Canvas canvas; 
+	public static Player player;
 	
 	public static void main(String[] args)
 	{
@@ -37,54 +45,47 @@ public class Main
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		final Canvas canvas = new Canvas();
+		//final Canvas canvas = new Canvas();
+		canvas = new Canvas();
 		frame.setContentPane(canvas);
 		frame.setVisible(true);
 		
-		frame.addMouseListener(new MouseListener() {
+		canvas.repaint();
+		/*player = new Player(new Point2D.Double(50, 50), MoveCapacity.Y);
+		
+		Element e = new Mirror(4, 4, 90);
+		new Mirror(8, 4, 90);
+		new Mirror(20, 4, 90);
+		new Mirror(4, 8, 90);*/
+		
+		//GameThread gameThread = new GameThread(canvas);
+		//gameThread.start();
+		
+		Level koukou = new Level(1, 1);
+		koukou.addElement(new Mirror(10, 20, 90));
+		LevelStorage lapin = new LevelStorage();
+		lapin.addLevel(koukou);
+		
+		frame.addMouseListener(canvas);
+		frame.addMouseMotionListener(canvas);
+		frame.addKeyListener(new KeyListener() {
 			
-			public void mouseReleased(MouseEvent e) {
-				int x = e.getX();
-				int y = e.getY();
-
-				switch (Utils.getWindows()) {
-				case 0:
-					Menu.mouseReleased(x, y);
-					break;
-				case 1:
-					LevelEditor.mouseReleased(x, y);
-					break;
-				}
-				
-				canvas.repaint();
-			}
-			
-			public void mousePressed(MouseEvent e) {
-				int x = e.getX();
-				int y = e.getY();
-
-				switch (Utils.getWindows()) {
-				case 0:
-					Menu.mousePressed(x, y);
-					break;
-				case 1:
-					LevelEditor.mousePressed(x, y);
-					break;
-				}
-				canvas.repaint();
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
 				
 			}
 			
-			public void mouseExited(MouseEvent e) {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
 				
 			}
 			
-			public void mouseEntered(MouseEvent e) {
-				
-			}
-			
-			public void mouseClicked(MouseEvent e) {
-				
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				e.getKeyCode();
 			}
 		});
 		

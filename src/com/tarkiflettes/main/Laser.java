@@ -10,6 +10,7 @@ public class Laser
 	private LaserColor laserColor;
 	private double coefX;
 	private double coefY;
+	private int lenght;
 	
 	public Laser(LaserColor color, Point2D startsCoords, double angle)
 	{
@@ -55,5 +56,15 @@ public class Laser
 	public double getCoefY()
 	{
 		return coefY;
+	}
+	
+	public void setLenght(int lenght)
+	{
+		this.lenght = lenght;
+	}
+	
+	public int getLenght()
+	{
+		return lenght;
 	}
 }

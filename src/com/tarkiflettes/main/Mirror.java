@@ -1,11 +1,11 @@
 package com.tarkiflettes.main;
 
 import java.awt.Polygon;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 
-import javax.sound.sampled.Line;
-
-public class Mirror extends Element
+public class Mirror extends Element implements Serializable
 {
 	public Mirror(int x, int y, int defaultAngle)
 	{
@@ -14,7 +14,7 @@ public class Mirror extends Element
 	}
 
 	@Override
-	public void handleLaser(Line line, Point2D point)
+	public void handleLaser(Line2D line, Point2D.Double point)
 	{
 		
 	}

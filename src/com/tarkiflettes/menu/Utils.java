@@ -4,7 +4,8 @@ import java.awt.Color;
 
 public class Utils {
 	
-	private static int window = 0;
+	private static int window = -1;
+	private static int cancelWindow = -1;
 
 	private static Color colorButton = new Color(41, 128, 185);
 	private static Color colorButtonText = new Color(240, 240, 240);
@@ -14,6 +15,24 @@ public class Utils {
 	private static String[] buttonsNames = {"Jouer", "Multijoueur", "Editeur de niveau", "Options", "Quitter"};
 	private static Color[] buttonsColors = {colorButton, colorButton, colorButton, colorButton, colorButton};
 	private static Color[] buttonsColorsText = {colorButtonText, colorButtonText, colorButtonText, colorButtonText, colorButtonText};
+	private static String[] imgCurrent = {
+			"src/com/tarkiflettes/menu/Bacon.png", 
+			"src/com/tarkiflettes/menu/Fromage.png", 
+			"src/com/tarkiflettes/menu/Oignon.png", 
+			"src/com/tarkiflettes/menu/Patate.png", 
+			"src/com/tarkiflettes/menu/Bacon.png"};
+	private static String[] img = {
+			"src/com/tarkiflettes/menu/Bacon.png", 
+			"src/com/tarkiflettes/menu/Fromage.png", 
+			"src/com/tarkiflettes/menu/Oignon.png", 
+			"src/com/tarkiflettes/menu/Patate.png", 
+			"src/com/tarkiflettes/menu/Bacon.png"};
+	private static String[] imgOver = {
+			"src/com/tarkiflettes/menu/BaconMO.png", 
+			"src/com/tarkiflettes/menu/FromageMO.png", 
+			"src/com/tarkiflettes/menu/Oignon.png", 
+			"src/com/tarkiflettes/menu/PatateMO.png", 
+			"src/com/tarkiflettes/menu/BaconMO.png"};
 	public static int[] buttonsX = {-1, -1, -1, -1, -1};
 	private static int[] buttonsY = {100, 225, 350, 475, 600};
 	private static int[] buttonsWidth = {500, 500, 500, 500, 500};
@@ -177,6 +196,66 @@ public class Utils {
 	}
 	public static int getWindows() {
 		return window;
+	}
+
+	public static String[] getImg() {
+		return img;
+	}
+	public static String getImg(int index) {
+		if (Utils.img.length>index)
+			return img[index];
+		else
+			return img[0];
+	}
+	public static void setImg(String[] img) {
+		Utils.img = img;
+	}
+	public static void setImg(String img, int index) {
+		if (Utils.img.length>index)
+			Utils.img[index] = img;
+	}
+	
+	
+	public static String[] getImgOver() {
+		return imgOver;
+	}
+	public static String getImgOver(int index) {
+		if (Utils.imgOver.length>index)
+			return imgOver[index];
+		else
+			return imgOver[0];
+	}
+	public static void setImgOver(String[] imgOver) {
+		Utils.imgOver = imgOver;
+	}
+	public static void setImgOver(String imgOver, int index) {
+		if (Utils.imgOver.length>index)
+			Utils.imgOver[index] = imgOver;
+	}
+	
+	
+	public static String[] getImgCurrent() {
+		return imgCurrent;
+	}
+	public static String getImgCurrent(int index) {
+		if (Utils.imgCurrent.length>index)
+			return imgCurrent[index];
+		else
+			return imgCurrent[0];
+	}
+	public static void setImgCurrent(String[] imgCurrent) {
+		Utils.imgCurrent = imgCurrent;
+	}
+	public static void setImgCurrent(String imgCurrent, int index) {
+		if (Utils.imgCurrent.length>index)
+			Utils.imgCurrent[index] = imgCurrent;
+	}
+	
+	public static void setCancelWindow(int cancelWindow) {
+		Utils.cancelWindow = cancelWindow;
+	}
+	public static int getCancelWindow() {
+		return Utils.cancelWindow;
 	}
 	
 }
